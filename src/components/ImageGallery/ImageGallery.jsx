@@ -1,6 +1,6 @@
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 
-export const ImageGallery = ({ hits }) => {
+export const ImageGallery = ({ hits, onClickImage }) => {
   return (
     <ul className='gallery'>
       {hits &&
@@ -9,6 +9,8 @@ export const ImageGallery = ({ hits }) => {
             <ImageGalleryItem
               description={itm.tags}
               prev={itm.webformatURL}
+              name={itm.id}
+              onClickImage={onClickImage}
             />
           </div>
         ))

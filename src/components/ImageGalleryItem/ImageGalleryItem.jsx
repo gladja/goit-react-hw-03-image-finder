@@ -1,7 +1,11 @@
-export const ImageGalleryItem = ({description, prev }) => {
+import { Modal } from '../Modal/Modal';
+
+export const ImageGalleryItem = ({ description, prev, name, onClickImage }) => {
   return (
-        <li  className='gallery-item'>
-          <img className='image' src={prev} alt={description} />
-        </li>
+    <>
+      <li onClick={onClickImage} className='gallery-item'>
+        <img className='image' src={prev} alt={description} name={name}/>
+      </li>
+    </>
   );
 };
