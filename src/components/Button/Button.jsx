@@ -1,15 +1,15 @@
 import { Wrap } from '../Loader/Loader.styled';
+import { Btn } from './Button.styled';
 
 export const Button = ({ handleLoadMore }) => {
   return (
     <Wrap>
-      <button
+      <Btn
         onClick={handleLoadMore}
         type='submit'
-        className='btn'
       >
         Load more
-      </button>
+      </Btn>
     </Wrap>
   );
 };

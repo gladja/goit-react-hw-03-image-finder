@@ -3,7 +3,6 @@ import { getSearchImage } from '../api/api-request';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
@@ -55,7 +54,6 @@ export class App extends Component {
   }
 
   searchFailed = ({ total }) => {
-    console.log(total);
     if (total === 0) {
       return toast.warn('Sorry, there are no images matching your search query. Please try again.');
     }
@@ -87,11 +85,8 @@ export class App extends Component {
   };
 
   onClickImage = e => {
-    // console.log(e.target.name);
     this.toggelModal();
-
     const find = this.state.hits.filter(itm => itm.id === e.target.name * 1);
-    // console.log(find[0].largeImageURL);
     return this.setState({ largeImageURL: find[0].largeImageURL });
   };
 

@@ -1,8 +1,9 @@
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
+import { Gallery } from './ImageGallery.styled';
 
 export const ImageGallery = ({ hits, onClickImage }) => {
   return (
-    <ul className='gallery'>
+    <Gallery>
       {hits &&
         hits.map((itm) => (
           <div key={itm.id}>
@@ -15,6 +16,6 @@ export const ImageGallery = ({ hits, onClickImage }) => {
           </div>
         ))
       }
-    </ul>
+    </Gallery>
   );
 };
