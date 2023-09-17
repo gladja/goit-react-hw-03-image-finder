@@ -1,4 +1,3 @@
-import { Modal } from '../Modal/Modal';
 import { Img, Item } from './ImageGalleryItem.styled';
 
 export const ImageGalleryItem = ({ description, prev, name, onClickImage }) => {

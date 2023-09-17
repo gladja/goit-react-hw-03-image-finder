@@ -29,7 +29,7 @@ export class Modal extends Component {
     return (
       <Overlay onClick={this.handleBackdropClick}>
         <Mod>
-          <img src={this.props.largeImageURL} alt='large Image ' />
+          <img src={this.props.largeImageURL} alt='large' />
         </Mod>
       </Overlay>
     );
