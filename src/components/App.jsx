@@ -12,9 +12,9 @@ import { Modal } from './Modal/Modal';
 export class App extends Component {
   state = {
     search: '',
-    hits: null,
+    hits: [],
     loading: false,
-    total: null,
+    total: 0,
     page: 1,
     showModal: false,
     largeImageURL: '',
@@ -31,20 +31,12 @@ export class App extends Component {
         const page = this.state.page;
         const data = await getSearchImage(search, page);
 
-        if (!this.state.hits) {
-          this.setState({
-            hits: data.hits,
-            total: data.total,
-          });
-        }
+        this.setState((prev) => ({
+          hits: [...prev.hits, ...data.hits],
+          total: data.total / 12,
+        }));
 
-        if (this.state.hits) {
-          this.setState((prev) => ({
-            hits: [...prev.hits, ...data.hits],
-          }));
-        }
-
-        await this.searchFailed(data);
+        this.searchFailed(data);
       } catch (error) {
         toast.error('Sorry ERROR. Please try again.');
       } finally {
@@ -60,16 +52,7 @@ export class App extends Component {
   };
 
   handleFormSubmit = (search) => {
-    this.setState({ search });
-    this.setState({ page: 1 });
-    this.setState({ hits: null });
-  };
-
-  btnLoadMore = () => {
-    if (this.state.total >= 12) {
-      return true;
-    }
-    return false;
+    this.setState({ search, page: 1, hits: [] });
   };
 
   btnLoadMorePage = () => {
@@ -91,13 +74,14 @@ export class App extends Component {
   };
 
   render() {
+    const btnLoadMore = Boolean(Math.floor(this.state.total));
 
     return (
       <>
         <Searchbar formSubmit={this.handleFormSubmit} />
         <ImageGallery hits={this.state.hits} onClickImage={this.onClickImage} />
         <Loader loading={this.state.loading} />
-        {this.btnLoadMore() && <Button handleLoadMore={this.btnLoadMorePage} />}
+        {btnLoadMore && <Button handleLoadMore={this.btnLoadMorePage} />}
 
         {this.state.showModal &&
           <Modal
