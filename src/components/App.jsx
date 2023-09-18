@@ -33,14 +33,14 @@ export class App extends Component {
 
         this.setState((prev) => ({
           hits: [...prev.hits, ...data.hits],
-          total: data.total / 12,
+          total: data.total,
         }));
 
         this.searchFailed(data);
       } catch (error) {
         toast.error('Sorry ERROR. Please try again.');
       } finally {
-        this.setState({ loading: false });
+        this.setState({ loading: false});
       }
     }
   }
@@ -52,6 +52,7 @@ export class App extends Component {
   };
 
   handleFormSubmit = (search) => {
+    console.log(search);
     this.setState({ search, page: 1, hits: [] });
   };
 
@@ -74,14 +75,13 @@ export class App extends Component {
   };
 
   render() {
-    const btnLoadMore = Boolean(Math.floor(this.state.total));
 
     return (
       <>
         <Searchbar formSubmit={this.handleFormSubmit} />
         <ImageGallery hits={this.state.hits} onClickImage={this.onClickImage} />
         <Loader loading={this.state.loading} />
-        {btnLoadMore && <Button handleLoadMore={this.btnLoadMorePage} />}
+        {this.state.total >= 12 && <Button handleLoadMore={this.btnLoadMorePage} />}
 
         {this.state.showModal &&
           <Modal
